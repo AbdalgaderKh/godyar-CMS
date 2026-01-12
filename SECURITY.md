@@ -2,7 +2,8 @@
 
 - لقد أزلنا ملف `.env` من المستودع وأضفناه إلى `.gitignore` لمنع تسريب كلمات المرور والمفاتيح.
 - أنصح فورًا بتغيير/تدوير أي كلمات مرور أو مفاتيح قد تكون مخزنة في هذا المستودع في وقتٍ سابق.
-- أضفنا فحصًا آليًا للأسرار عبر GitHub Actions (`.github/workflows/secret-scan.yml`).
+- أضفنا فحصًا آليًا للأسرار عبر GitHub Actions (`.github/workflows/secret-scan.yml`) وأدرجناه أيضًا في CI الرئيسي لضمان فحص PRs.
+- قمنا بتشديد سياسة Content-Security-Policy (CSP) لحرمان السكربتات inline من التنفيذ (`script-src 'self'`)، مع الإبقاء على `style-src 'unsafe-inline'` لأجل التوافق. قد يسبب هذا كسرًا لقطع واجهة تستخدم سكربتات inline؛ إن ظهر ذلك يمكنني مساعدتك في ترجيح النُهج إلى nonces أو نقل السكربتات لملفات منفصلة.
 - لرفع مستوى الحماية: استخدم مدير أسرار خارجي (Vault, AWS Secrets Manager, Docker secrets) وفعّل فحوصات قبل الالتزام (pre-commit) مثل `gitleaks` أو `detect-secrets`.
 
 إذا رغبت، يمكنني أيضاً:
