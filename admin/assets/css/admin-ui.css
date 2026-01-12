@@ -1,0 +1,246 @@
+:root{
+  --gdy-bg:#020617;
+  --gdy-surface:rgba(15,23,42,.92);
+  --gdy-border:rgba(148,163,184,.22);
+  --gdy-text:#e5e7eb;
+  --gdy-muted:#9ca3af;
+  /* Admin accent (defaults to Blue theme) */
+  --gdy-accent:#0ea5e9;
+  --gdy-accent-2:#0369a1;
+  --gdy-accent-on:#041521;
+  --gdy-success:#22c55e;
+  --gdy-danger:#ef4444;
+
+  /* Page header gradient */
+  --gdy-header-from: var(--gdy-accent);
+  --gdy-header-to: var(--gdy-accent-2);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Admin theme presets (controlled via <html data-admin-theme="...">) */
+/* -------------------------------------------------------------------------- */
+
+html[data-admin-theme="blue"]{
+  --gdy-accent:#0ea5e9;
+  --gdy-accent-2:#0369a1;
+  --gdy-accent-on:#041521;
+  --gdy-header-from: #0ea5e9;
+  --gdy-header-to: #0369a1;
+}
+
+html[data-admin-theme="red"]{
+  --gdy-accent:#ef4444;
+  --gdy-accent-2:#b91c1c;
+  --gdy-accent-on:#ffffff;
+  --gdy-header-from: #ef4444;
+  --gdy-header-to: #b91c1c;
+}
+
+html[data-admin-theme="green"]{
+  --gdy-accent:#22c55e;
+  --gdy-accent-2:#16a34a;
+  --gdy-accent-on:#04110a;
+  --gdy-header-from: #22c55e;
+  --gdy-header-to: #16a34a;
+}
+
+html[data-admin-theme="brown"]{
+  /* Warm brown/amber (readable + not too saturated) */
+  --gdy-accent:#b45309;
+  --gdy-accent-2:#92400e;
+  --gdy-accent-on:#ffffff;
+  --gdy-header-from: #b45309;
+  --gdy-header-to: #92400e;
+}
+
+html,body{
+  background:radial-gradient(circle at top, var(--gdy-bg), var(--gdy-bg) 55%);
+  color:var(--gdy-text);
+  overflow-x:hidden;
+}
+
+/* Main shell (prevents sidebar overlap + fixes content going off-screen) */
+.admin-content{
+  box-sizing:border-box;
+  padding: 1.25rem 1rem 2rem;
+  min-height: 100vh;
+}
+
+@media (min-width: 992px){
+  html[dir="rtl"] .admin-content{ margin-right: 260px !important; margin-left: 0 !important; }
+  html[dir="ltr"] .admin-content{ margin-left: 260px !important; margin-right: 0 !important; }
+}
+/* Shell: use full available width (prevents large empty side space) */
+.gdy-admin-shell{
+  max-width: none;
+  margin: 0;
+}
+/* Page header */
+.gdy-page-header{
+  background: linear-gradient(135deg, var(--gdy-header-from), var(--gdy-header-to));
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem;
+  box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+.gdy-page-title{margin:0;font-weight:800;font-size:1.15rem;}
+.gdy-page-subtitle{margin:.35rem 0 0;color:rgba(255,255,255,.9);font-size:.9rem;}
+.gdy-breadcrumb{color:rgba(255,255,255,.9);font-size:.82rem;opacity:.95}
+
+/* Cards */
+.gdy-card{
+  background: var(--gdy-surface);
+  border: 1px solid var(--gdy-border);
+  border-radius: 16px;
+  box-shadow: 0 14px 45px rgba(0,0,0,.35);
+}
+.gdy-card .card-header{
+  background: transparent;
+  border-bottom: 1px solid rgba(148,163,184,.18);
+}
+
+/* Forms (dark) */
+.form-control, .form-select, .form-check-input{
+  background: rgba(2,6,23,.55);
+  border-color: rgba(148,163,184,.35);
+  color: var(--gdy-text);
+  border-radius: 12px;
+}
+.form-control:focus, .form-select:focus{
+  background: rgba(2,6,23,.85);
+  border-color: color-mix(in srgb, var(--gdy-accent) 78%, #ffffff 22%);
+  box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--gdy-accent) 22%, transparent 78%);
+  color: var(--gdy-text);
+}
+.form-text{color: var(--gdy-muted);}
+
+/* Buttons */
+.btn-gdy{
+  border-radius: 12px;
+  font-weight: 700;
+}
+.btn-gdy-primary{background: linear-gradient(135deg, var(--gdy-accent), var(--gdy-accent-2));border:0;color:var(--gdy-accent-on);}
+.btn-gdy-outline{background: transparent;border: 1px solid rgba(148,163,184,.35);color: var(--gdy-text);}
+.btn-gdy-outline:hover{background: rgba(148,163,184,.10);}
+
+/* Keep colors consistent + readable (override Bootstrap primary inside admin) */
+.admin-content .btn-primary{
+  background: linear-gradient(135deg, var(--gdy-accent), var(--gdy-accent-2));
+  border: 0;
+  color: var(--gdy-accent-on);
+}
+.admin-content .btn-primary:hover{ filter: brightness(1.05); }
+.admin-content .btn-primary:focus{ box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--gdy-accent) 22%, transparent 78%); }
+.admin-content .btn-outline-primary{
+  border-color: color-mix(in srgb, var(--gdy-accent) 70%, #ffffff 30%);
+  color: color-mix(in srgb, var(--gdy-accent) 85%, #ffffff 15%);
+}
+.admin-content .btn-outline-primary:hover{
+  background: color-mix(in srgb, var(--gdy-accent) 15%, transparent 85%);
+}
+
+/* Tables */
+.table{
+  color: var(--gdy-text);
+}
+.table thead th{border-bottom-color: rgba(148,163,184,.25);}
+.table td, .table th{border-top-color: rgba(148,163,184,.14);}
+.table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+/* Utilities */
+.gdy-muted{color: var(--gdy-muted) !important;}
+
+
+/* Prevent nested .admin-content wrappers (some pages wrap content twice) */
+.admin-content .admin-content{
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: auto;
+}
+
+/* Make bootstrap containers use full width inside admin to avoid side empty space */
+.admin-content .container{
+  max-width: 100% !important;
+}
+
+/* Mobile bar + backdrop (for off-canvas sidebar) */
+.gdy-admin-mobilebar{
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  padding: .55rem .75rem;
+  background: rgba(2,6,23,.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(148,163,184,.18);
+}
+.gdy-admin-menu-btn{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,.25);
+  background: rgba(15,23,42,.92);
+  color: var(--gdy-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.gdy-admin-menu-btn:hover{
+  border-color: rgba(56,189,248,.45);
+}
+.gdy-admin-backdrop{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  z-index: 1035;
+}
+
+/* When sidebar is open on mobile */
+body.admin-sidebar-open .gdy-admin-backdrop{ display:block !important; }
+
+
+/* Notifications dropdown */
+.gdy-notif-menu{
+  background: rgba(15,23,42,.98);
+  border: 1px solid rgba(148,163,184,.22);
+  border-radius: 16px;
+  box-shadow: 0 18px 55px rgba(0,0,0,.5);
+  min-width: 320px;
+  max-width: 420px;
+}
+.gdy-notif-menu .btn{border-radius:12px;}
+.gdy-notif-item:hover{background: rgba(148,163,184,.08)!important;}
+
+
+/* -----------------------------------------
+   SVG icon sizing (NoCDN / SVG sprite)
+   Fix: prevent default 300x150 SVG rendering
+----------------------------------------- */
+svg.gdy-icon{
+  width:20px;
+  height:20px;
+  max-width:100%;
+  max-height:100%;
+  display:inline-block;
+  vertical-align:middle;
+  fill:currentColor;
+}
+.admin-sidebar svg.gdy-icon,
+.admin-sidebar__link-icon svg.gdy-icon{
+  width:18px;
+  height:18px;
+}
+.gdy-quick-btn svg.gdy-icon{
+  width:22px;
+  height:22px;
+}
+.gdy-stat-card svg.gdy-icon{
+  width:44px;
+  height:44px;
+  opacity:.9;
+}
+.gdy-page-header svg.gdy-icon{
+  width:56px;
+  height:56px;
+  opacity:.9;
+}
+

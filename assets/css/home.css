@@ -1,0 +1,67 @@
+:root{
+  --violet-1:#7c3aed;
+  --violet-2:#a78bfa;
+  --violet-3:#6d28d9;
+  --text:#0f172a;
+}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma; margin:0; color:var(--text); background:#fff}
+
+.container{max-width:1200px;margin:0 auto;padding:0 16px}
+
+.site-header{
+  background:linear-gradient(90deg,var(--violet-1),var(--violet-2));
+  color:#fff;
+}
+.site-header .container{display:flex;align-items:center;gap:24px;padding:14px 16px}
+.branding .logo{color:#fff;text-decoration:none;font-weight:800;font-size:22px}
+.main-nav a{color:#fff;text-decoration:none;margin-inline:8px;opacity:.95}
+.main-nav a:hover{opacity:1;text-decoration:underline}
+
+.lead{margin:18px 0}
+.lead-card{position:relative;border-radius:18px;overflow:hidden;display:block}
+.lead-card img{width:100%;height:460px;object-fit:cover;display:block}
+.lead-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.55),rgba(0,0,0,0));
+  color:#fff;padding:24px;display:flex;flex-direction:column;justify-content:flex-end
+}
+.lead-overlay h1{margin:0 0 8px;font-size:32px}
+.lead-overlay p{margin:0;opacity:.95}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:22px 0 10px}
+.section-head h2{margin:0}
+.section-head .more{color:var(--violet-3);text-decoration:none}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+.card{
+  display:flex;flex-direction:column;border-radius:16px;overflow:hidden;text-decoration:none;color:inherit;
+  background:linear-gradient(180deg,#fff, #faf5ff);
+  border:1px solid #ede9fe;
+  box-shadow:0 6px 16px rgba(109,40,217,.08);
+}
+.card .thumb img{width:100%;height:160px;object-fit:cover;display:block}
+.card .meta{padding:10px 12px}
+.card .meta h3{margin:0 0 6px;font-size:16px}
+.card .meta p{margin:0;color:#475569;font-size:13px}
+
+.ad-between{margin:24px 0;text-align:center}
+
+.site-footer{
+  margin-top:24px;
+  background:linear-gradient(90deg,var(--violet-1),var(--violet-2));
+  color:#fff;padding:30px 0 10px
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px}
+.footer-grid a{color:#fff;text-decoration:underline}
+.copy{text-align:center;opacity:.9;padding:8px 0;border-top:1px solid rgba(255,255,255,.25);margin-top:14px}
+
+@media (max-width:900px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .lead-card img{height:300px}
+  .footer-grid{grid-template-columns:1fr}
+}

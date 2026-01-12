@@ -1,0 +1,235 @@
+/* PWA / Mobile app-like UI helpers */
+
+/* Install button (Android/Chromium) */
+.gdy-install-btn{
+  position: fixed;
+  left: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 9999;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(10,14,22,.92);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1;
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.gdy-install-btn:active{
+  transform: translateY(1px);
+}
+
+.gdy-install-dismiss{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.12);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* iOS Add to Home Screen tip */
+.gdy-ios-a2hs{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 9999;
+  background: rgba(10,14,22,.92);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  box-shadow: 0 10px 36px rgba(0,0,0,.28);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.gdy-ios-a2hs__inner{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 12px;
+}
+
+.gdy-ios-a2hs__txt{
+  font-size: 13px;
+  line-height: 1.35;
+  flex: 1;
+}
+
+.gdy-ios-a2hs__txt strong{
+  display: block;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.gdy-ios-a2hs__close{
+  appearance: none;
+  border: 0;
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gdy-a2hs-ico{
+  width: 16px;
+  height: 16px;
+  vertical-align: -3px;
+  fill: currentColor;
+}
+
+@media (min-width: 768px){
+  .gdy-install-btn, .gdy-ios-a2hs{ display:none; }
+}
+
+
+
+/* ===========================
+   Safe-area + touch UX tweaks
+   =========================== */
+:root{
+  --gdy-safe-top: env(safe-area-inset-top, 0px);
+  --gdy-safe-right: env(safe-area-inset-right, 0px);
+  --gdy-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --gdy-safe-left: env(safe-area-inset-left, 0px);
+}
+
+html, body{
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Make tap targets comfortable on mobile */
+button, a, input, select, textarea{
+  min-height: 44px;
+}
+
+/* ===========================
+   Splash screen (web-level)
+   Note: iOS launch screens still need startup images for full native look.
+   =========================== */
+.gdy-splash{
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none; /* enabled by JS only in standalone */
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 14px;
+  background: #733EC0;
+  padding: calc(20px + var(--gdy-safe-top)) 20px calc(20px + var(--gdy-safe-bottom)) 20px;
+}
+.gdy-splash__logo{
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.gdy-splash__spinner{
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 3px solid rgba(255,255,255,.35);
+  border-top-color: #fff;
+  animation: gdy-spin .8s linear infinite;
+}
+@keyframes gdy-spin{ to{ transform: rotate(360deg);} }
+
+.gdy-splash.is-visible{ display:flex; }
+.gdy-splash.is-hiding{ opacity: 0; transition: opacity .25s ease; }
+
+
+/* Install banner (nicer UX than a floating button) */
+.gdy-install-banner,
+.gdy-update-banner{
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  z-index: 10000;
+  direction: rtl;
+  font-family: inherit;
+}
+.gdy-install-banner__inner,
+.gdy-update-banner__inner{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 12px;
+  border-radius:16px;
+  border:1px solid rgba(0,0,0,.10);
+  background: rgba(255,255,255,.92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.14);
+}
+.gdy-install-banner__text,
+.gdy-update-banner__text{min-width:0}
+.gdy-install-banner__title,
+.gdy-update-banner__title{
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+.gdy-install-banner__desc,
+.gdy-update-banner__desc{
+  font-size: 12px;
+  opacity: .8;
+  line-height: 1.4;
+}
+.gdy-install-banner__actions,
+.gdy-update-banner__actions{
+  display:flex;
+  gap:8px;
+  flex-shrink:0;
+}
+
+/* Shared button styles */
+.gdy-btn{
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  min-height: 40px;
+  min-width: 64px;
+}
+.gdy-btn-primary{
+  background: #2E86C1;
+  color: #fff;
+}
+.gdy-btn-ghost{
+  background: rgba(0,0,0,.06);
+  color: #111;
+}
+
+@media (max-width: 380px){
+  .gdy-install-banner__inner,
+  .gdy-update-banner__inner{
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .gdy-install-banner__actions,
+  .gdy-update-banner__actions{justify-content: flex-start}
+}

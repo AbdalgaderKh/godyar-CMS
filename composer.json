@@ -1,0 +1,26 @@
+{
+  "name": "godyar/cms",
+  "type": "project",
+  "require": {
+    "php": ">=8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Godyar\\": "includes/classes/",
+      "App\\": "src/"
+    }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.0",
+    "phpstan/phpstan": "^1.11",
+    "vimeo/psalm": "^5.0",
+    "phpunit/phpunit": "^10.0"
+  },
+  "scripts": {
+    "lint": "php -l index.php",
+    "cs": "php-cs-fixer fix --diff --ansi",
+    "stan": "phpstan analyse --ansi",
+    "psalm": "psalm --show-info=true",
+    "test": "phpunit"
+  }
+}

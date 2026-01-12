@@ -1,0 +1,665 @@
+/*
+  Godyar Front Theme Core
+  - يربط مكوّنات الواجهة بمتغيرات الثيم (Colors/Tokens).
+  - يدعم صفحات فيها CSS داخلي داخل <style> عبر !important بشكل محدود ومركّز.
+  - الهدف: هوية لونية واضحة + قراءة مريحة + بدون فوضى بصرية.
+*/
+
+:root{
+  /* Fallbacks (في حال عدم وجود إعدادات/ثيم) */
+  --primary: #111111; /* Al Jazeera Gold */
+  --primary-dark: #000000; /* darker gold */
+  O,17,17;
+
+  /* Back-compat aliases used by some inline/page CSS */
+  --gdy-primary: var(--primary);
+  --gdy-primary-dark: var(--primary-dark);
+  --gdy-primary-rgb: var(--primary-rgb);
+
+  --page-bg: #FFFFFF;
+  --page-bg-alt: #F6F6F6;
+
+  --card-border: rgba(var(--primary-rgb), .18);
+  --card-border-strong: rgba(var(--primary-rgb), .38);
+  --card-glow: rgba(var(--primary-rgb), .14);
+
+  --breaking-bg: #111111; /* Al Jazeera Blue */
+  --breaking-text: #FFFFFF;
+
+  --badge-bg: #FFFEFA;
+  --badge-border: rgba(var(--primary-rgb), .30);
+  --badge-text: #0B0B0B;
+
+  --footer-bg: linear-gradient(180deg, rgba(var(--primary-rgb), .06) 0%, rgba(255,255,255,1) 100%); /* Al Jazeera Blue */
+  --footer-surface: rgba(255,251,242,.92);
+
+  /* ===== هوية الهيدر/الفوتر (تابعة للثيم) ===== */
+  --on-primary: #0B0B0B;
+  --on-primary-muted: rgba(11,11,11,.72);
+
+  /* هيدر خفيف بهوية الثيم (Tint) */
+  --header-bg: #FFFBF2;
+  --header-border: rgba(0,0,0,.10);
+  --header-shadow: 0 18px 40px rgba(15,23,42,.10);
+
+  /* أسطح وأزرار الهيدر */
+  --header-secondary-bg: rgba(255,251,242,.78);
+  --header-menu-bg: rgba(255,251,242,.96);
+  --header-chip-bg: rgba(255,255,255,.65);
+
+  --header-surface: rgba(255,255,255,.62);
+  --header-surface-hover: rgba(255,255,255,.78);
+  --header-chip-border: rgba(var(--primary-rgb), .22);
+
+  /* Aliases used by legacy CSS */
+  --bg-page: var(--page-bg);
+  --bg-header: var(--header-bg);
+  --bg-footer: var(--footer-bg);
+
+  /* فوتر خفيف بهوية الثيم */
+  --footer-bg: linear-gradient(180deg, rgba(var(--primary-rgb), .06) 0%, rgba(255,255,255,1) 100%);
+  --footer-text: #0B0B0B;
+  --footer-muted: rgba(11,11,11,.72);
+
+  --newsletter-bg: rgba(255,255,255,.92);
+  --newsletter-border: rgba(var(--primary-rgb), .35);
+
+
+  /* Typography / surfaces (خفيف - consistent across pages) */
+  --text-strong: #000000;
+  --text: #111111;
+  --text-muted: #333333;
+  --text-soft: #666666;
+
+  --surface: #FFFEFA;
+  --surface-2: rgba(255,254,250,.96);
+  --surface-3: rgba(255,255,255,.88);
+
+  /* Light theme tint (used for sections, sidebar, cards) */
+  --tint-1: rgba(var(--primary-rgb), .06);
+  --tint-2: rgba(var(--primary-rgb), .10);
+  --tint-3: rgba(var(--primary-rgb), .14);
+
+  /* Unified radii (professional) */
+  --radius-sm: 12px;
+  --radius: 14px;
+  --radius-lg: 18px;
+
+  --soft-bg: var(--tint-1);
+  --soft-border: rgba(var(--primary-rgb), .18);
+  --soft-border-strong: rgba(var(--primary-rgb), .34);
+  --soft-shadow: 0 10px 24px rgba(15,23,42,.08);
+
+  /* Generic chip/button surfaces on colored header */
+  --chip-bg: rgba(255,255,255,.70);
+  --chip-bg-hover: rgba(255,255,255,.84);
+  --chip-border: rgba(var(--primary-rgb), .22);
+
+}
+
+/* ================================
+   Icons / Accents
+   ================================ */
+
+.hm-section-title i,
+.hm-topbar-badge i,
+.hm-weather-title i,
+.hm-weather-circle i,
+.cats-link i,
+.cats-link svg,
+.gdy-category-chip i,
+.gdy-category-chip svg{
+  color: var(--primary) !important;
+}
+
+/* ================================
+   Cards / Frames
+   ================================ */
+
+.hm-card,
+.gdy-card,
+.cat-card,
+.cat-card-modern,
+.post-card,
+.news-card,
+.article-card,
+.card{
+  border-color: var(--card-border) !important;
+}
+
+.hm-card:hover,
+.gdy-card:hover,
+.cat-card:hover,
+.cat-card-modern:hover,
+.post-card:hover,
+.news-card:hover,
+.article-card:hover,
+.card:hover{
+  border-color: var(--card-border-strong) !important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.12),
+    0 0 0 1px var(--card-border) !important;
+}
+
+/* ================================
+   Badges / Chips
+   ================================ */
+
+.hm-card-badge,
+.gdy-badge,
+.gdy-chip,
+.gdy-category-chip,
+.tag-badge,
+.category-badge{
+  background: var(--badge-bg) !important;
+  border-color: var(--badge-border) !important;
+  color: var(--badge-text) !important;
+}
+
+/* ================================
+   Breaking / عاجل
+   ================================ */
+
+.hm-topbar-ticker-label,
+.breaking-label,
+.breaking-badge,
+.breaking-pill{
+  background: var(--breaking-bg) !important;
+  color: var(--breaking-text) !important;
+  border-color: rgba(var(--primary-rgb), .45) !important;
+}
+
+/* ================================
+   Buttons (primary feel)
+   ================================ */
+
+.hm-weather-btn,
+.hm-cta-btn,
+.btn-gdy-primary,
+.btn-primary{
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.hm-weather-btn:hover,
+.hm-cta-btn:hover,
+.btn-gdy-primary:hover,
+.btn-primary:hover{
+  filter: brightness(1.03);
+}
+
+.hm-pill.active{
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+.hm-pill:hover{
+  border-color: rgba(var(--primary-rgb), .80) !important;
+}
+
+/* ================================
+   Newsletter
+   ================================ */
+
+.hm-newsletter{
+  background: var(--newsletter-bg) !important;
+  border-color: var(--newsletter-border) !important;
+}
+
+.hm-newsletter button,
+.hm-newsletter .btn{
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* ================================
+   Footer icons / footer accents
+   ================================ */
+
+.gdy-footer,
+.site-footer{
+  background: var(--footer-bg) !important;
+}
+
+.gdy-social-icon{
+  border-color: rgba(var(--primary-rgb), .38) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,.26), 0 0 0 1px rgba(var(--primary-rgb), .10) !important;
+}
+
+.gdy-social-icon::before{
+  background: conic-gradient(
+    from 25deg,
+    rgba(var(--primary-rgb), 0) 0deg,
+    rgba(var(--primary-rgb), .85) 90deg,
+    rgba(var(--primary-rgb), 0) 180deg,
+    rgba(var(--primary-rgb), .55) 270deg,
+    rgba(var(--primary-rgb), 0) 360deg
+  ) !important;
+}
+
+.gdy-social-icon::after{
+  background: radial-gradient(circle at top,
+    rgba(var(--primary-rgb), .26) 0%,
+    rgba(15,23,42,.88) 55%
+  ) !important;
+}
+
+.gdy-social-icon:hover{
+  transform: translateY(-2px);
+  border-color: rgba(var(--primary-rgb), .70) !important;
+}
+
+/* Links hover accents (subtle) */
+a:hover{
+  text-decoration-color: rgba(var(--primary-rgb), .55);
+}
+
+/* ================================
+   Brand / Site name / Headings
+   ================================ */
+
+.site-header .brand-title,
+.brand-title{
+  color: var(--on-primary) !important;
+  text-shadow: 0 0 18px rgba(var(--primary-rgb), .22);
+}
+
+.site-header .brand-subtitle,
+.brand-subtitle{
+  color: var(--on-primary-muted) !important;
+}
+
+.site-header .brand-mark{
+  border-color: rgba(var(--primary-rgb), .60) !important;
+  box-shadow: 0 14px 36px rgba(0,0,0,.28), 0 0 0 3px rgba(var(--primary-rgb), .14) !important;
+}
+
+.site-header .brand-mark i,
+.site-header .brand-mark svg{
+  color: var(--primary) !important;
+}
+
+/* عناوين الأقسام داخل الصفحات */
+.hm-section-title,
+.hm-block-title,
+.cat-main-title,
+.cat-sidebar-title,
+.gdy-page-title,
+.gdy-section-title{
+  color: var(--primary-dark) !important;
+}
+
+/* ================================
+   Author avatar / الكاتب
+   ================================ */
+
+.article-author-avatar,
+.author-avatar,
+.opinion-author-avatar{
+  border-color: rgba(var(--primary-rgb), .90) !important;
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), .14) !important;
+}
+
+.article-author-social a:hover,
+.author-social a:hover{
+  border-color: rgba(var(--primary-rgb), .80) !important;
+  color: var(--primary-dark) !important;
+}
+
+/* ================================
+   Category pages (modern)
+   ================================ */
+
+.gdy-cat-page{
+  background: linear-gradient(180deg, rgba(var(--primary-rgb), .06), transparent 240px) !important;
+}
+
+.cat-header,
+.cat-sidebar-card,
+.cat-card-modern{
+  border-color: rgba(var(--primary-rgb), .22) !important;
+}
+
+.cat-pill.active{
+  background: rgba(var(--primary-rgb), .12) !important;
+  border-color: rgba(var(--primary-rgb), .55) !important;
+  color: var(--primary-dark) !important;
+}
+
+.cat-pill:hover{
+  border-color: rgba(var(--primary-rgb), .70) !important;
+}
+
+/* ================================
+   Home newsletter (وضوح أعلى)
+   ================================ */
+
+.hm-newsletter{
+  background: var(--newsletter-bg) !important;
+  border-color: var(--newsletter-border) !important;
+  color: #0f172a !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,.08) !important;
+}
+
+.hm-newsletter h2{
+  color: var(--primary-dark) !important;
+}
+
+.hm-newsletter p{
+  color: #334155 !important;
+}
+
+.hm-newsletter-form input{
+  background:#ffffff !important;
+  border-color: rgba(var(--primary-rgb), .25) !important;
+  color:#0f172a !important;
+}
+
+.hm-newsletter-form input::placeholder{
+  color:#94a3b8 !important;
+}
+
+.hm-newsletter-form input:focus{
+  border-color: rgba(var(--primary-rgb), .65) !important;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), .12) !important;
+}
+
+.hm-quick-link{
+  background:#ffffff !important;
+  border-color: rgba(var(--primary-rgb), .22) !important;
+  color:#0f172a !important;
+}
+
+.hm-quick-link:hover{
+  border-color: rgba(var(--primary-rgb), .60) !important;
+  color: var(--primary-dark) !important;
+}
+
+/* ================================
+   Weather card
+   ================================ */
+
+.hm-weather{
+  border-color: rgba(var(--primary-rgb), .22) !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,.08), 0 0 0 1px rgba(var(--primary-rgb), .06) !important;
+}
+
+.hm-weather-select:focus,
+.hm-weather-input:focus{
+  border-color: rgba(var(--primary-rgb), .65) !important;
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), .12) !important;
+}
+
+/* ================================
+   Footer title accent
+   ================================ */
+
+.gdy-footer-title{ color: var(--footer-text, #0B0B0B) !important;
+  text-shadow: 0 0 18px rgba(var(--primary-rgb), .18);
+}
+
+.gdy-footer-subtitle{ color: var(--footer-muted, rgba(11,11,11,.72)) !important;
+}
+
+/* ================================
+   Opinion Authors block (كتاب الرأي) - theme binding
+   ================================ */
+
+.hm-opinion-author-card{
+  border-color: var(--card-border) !important;
+  box-shadow: 0 8px 22px rgba(var(--primary-rgb), .06) !important;
+}
+
+.hm-opinion-author-avatar{
+  border-color: rgba(var(--primary-rgb), .90) !important;
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb), .14) !important;
+}
+
+.hm-opinion-author-name{
+  color: #0f172a !important;
+}
+
+
+/* -----------------------------------------------------
+   Extra bindings to cover all frontend pages
+----------------------------------------------------- */
+
+/* Site name & navigation section names */
+.site-brand a, .site-brand .brand-title,
+.navbar a.nav-link, .nav-categories a, .nav-categories a.nav-link,
+.header-cats a, .header-cats a * {
+  color: var(--text-strong);
+}
+.site-brand a:hover .brand-title,
+.navbar a.nav-link:hover, .nav-categories a:hover, .header-cats a:hover {
+  color: var(--primary);
+}
+
+/* Section headings / block titles */
+.section-title, .hm-section-title, .hm-block-title,
+.godyar-home-section-title, .gdy-section-title, .block-title,
+.sidebar-title, .widget-title, .page-title, .category-title {
+  position: relative;
+  color: var(--text-strong);
+}
+.section-title::before, .hm-section-title::before, .hm-block-title::before,
+.godyar-home-section-title::before, .gdy-section-title::before, .block-title::before,
+.sidebar-title::before, .widget-title::before, .page-title::before, .category-title::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--primary);
+  margin-inline-end: 10px;
+  transform: translateY(-1px);
+}
+
+/* Author avatars / comment avatars (frames) */
+.gdy-opinion-author-avatar,
+.opinion-author-avatar,
+.author-avatar,
+.comment-avatar img,
+.comment-item .avatar img,
+.news-author img,
+.news-author-avatar,
+.author-box img,
+.author-card img {
+  border: 2px solid rgba(var(--primary-rgb), .55) !important;
+  box-shadow: 0 10px 24px rgba(var(--primary-rgb), .18) !important;
+  border-radius: 999px;
+}
+
+/* "أخبار عاجلة" / ticker */
+.breaking, .breaking-bar, .breaking-news, .breaking-ticker,
+.gdy-breaking, .gdy-breaking-bar {
+  border-color: rgba(var(--primary-rgb), .30) !important;
+}
+.breaking a:hover, .breaking-bar a:hover, .breaking-news a:hover, .breaking-ticker a:hover,
+.gdy-breaking a:hover, .gdy-breaking-bar a:hover {
+  color: var(--primary);
+}
+
+/* Newsletter block (ensure contrast and clarity) */
+.hm-newsletter, .newsletter, .newsletter-box, .newsletter-card,
+.footer-newsletter, .newsletter-section {
+  border: 1px solid rgba(var(--primary-rgb), .25);
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), .08), rgba(255,255,255,.85));
+}
+.hm-newsletter .btn, .newsletter .btn, .newsletter-box .btn, .newsletter-card .btn,
+.footer-newsletter .btn {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.hm-newsletter .btn:hover, .newsletter .btn:hover, .newsletter-box .btn:hover, .newsletter-card .btn:hover,
+.footer-newsletter .btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+/* Elections widgets/cards (generic) */
+.elections-card, .election-card, .election-widget, .elections-widget,
+.election-result, .election-results, .election-box {
+  border: 1px solid rgba(var(--primary-rgb), .18);
+}
+.elections-card .badge, .election-card .badge, .election-widget .badge,
+.election-results .badge {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border-color: var(--badge-border);
+}
+
+
+
+/* ============================================================
+   Pro UI System (Light identity)
+   - Buttons / Cards / Inputs unified
+   - Bootstrap bridge to theme colors
+   ============================================================ */
+
+/* Bootstrap bridge */
+:root{
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: var(--primary-rgb);
+  --bs-link-color: var(--primary);
+  --bs-link-hover-color: var(--primary-dark);
+  --bs-info: var(--primary);
+  --bs-info-rgb: var(--primary-rgb);
+}
+
+/* Base surfaces */
+body{
+  background: var(--page-bg);
+  color: var(--text-main);
+}
+
+/* Inputs */
+input, select, textarea, .form-control, .form-select{
+  border-radius: var(--radius-sm) !important;
+  border-color: rgba(var(--primary-rgb), .18) !important;
+  background-color: #fff !important;
+}
+input:focus, select:focus, textarea:focus, .form-control:focus, .form-select:focus{
+  border-color: rgba(var(--primary-rgb), .45) !important;
+  box-shadow: 0 0 0 .22rem rgba(var(--primary-rgb), .14) !important;
+}
+
+/* Buttons */
+.btn{
+  border-radius: var(--radius-sm) !important;
+  font-weight: 700;
+  letter-spacing: .2px;
+}
+.btn-primary, .btn.btn-primary{
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: #fff !important;
+}
+.btn-primary:hover, .btn.btn-primary:hover{
+  background: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+}
+.btn-outline-primary, .btn.btn-outline-primary{
+  background: #fff !important;
+  color: var(--primary) !important;
+  border-color: rgba(var(--primary-rgb), .35) !important;
+}
+.btn-outline-primary:hover, .btn.btn-outline-primary:hover{
+  background: var(--tint-2) !important;
+  border-color: rgba(var(--primary-rgb), .55) !important;
+  color: var(--primary-dark) !important;
+}
+.btn-light, .btn-outline-dark, .btn-outline-secondary{
+  background: #fff !important;
+  color: var(--primary) !important;
+  border-color: rgba(var(--primary-rgb), .25) !important;
+}
+.btn-outline-dark:hover, .btn-outline-secondary:hover{
+  background: var(--tint-2) !important;
+  border-color: rgba(var(--primary-rgb), .45) !important;
+}
+
+/* Cards (generic) */
+.card, .gdy-card, .news-card, .post-card, .widget, .sidebar-card,
+.gdy-widget, .gdy-widget-card, .gdy-box, .box, .panel{
+  background: #fff;
+  border: 1px solid rgba(var(--primary-rgb), .14);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 24px rgba(15,23,42,.06);
+}
+.card:hover, .gdy-card:hover, .news-card:hover, .post-card:hover,
+.widget:hover, .sidebar-card:hover, .gdy-widget:hover{
+  border-color: rgba(var(--primary-rgb), .32);
+  box-shadow: 0 16px 34px rgba(15,23,42,.08);
+}
+
+/* Badges / chips */
+.badge, .tag, .chip{
+  border-radius: 999px;
+}
+
+/* Links hover (newsroom) */
+a.title:hover, .post-title a:hover, .news-title a:hover, .article-title a:hover{
+  color: var(--primary) !important;
+}
+
+/* Header category active state (light) */
+.cats-link.active, .cats-link[aria-current="page"]{
+  border-color: rgba(var(--primary-rgb), .55) !important;
+  box-shadow: 0 8px 18px rgba(var(--primary-rgb), .10) !important;
+  position: relative;
+}
+.cats-link.active::after, .cats-link[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  inset-inline-start: 14px;
+  bottom: -6px;
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--primary);
+  opacity: .85;
+}
+
+/* Reduce over-glow on brand/logo */
+.brand-title, .site-name, .logo-text{
+  text-shadow: none !important;
+}
+
+
+/* ===== Force-color utilities to follow theme (works for Bootstrap 4/5 and custom inline classes) ===== */
+.text-primary, a.text-primary, .link-primary { color: var(--primary) !important; }
+.text-info, a.text-info { color: var(--primary) !important; }
+.border-primary { border-color: rgba(var(--primary-rgb), .45) !important; }
+.bg-primary { background-color: var(--primary) !important; }
+.bg-info { background-color: var(--primary) !important; }
+.badge.bg-primary, .badge.bg-info, .badge.badge-info, .badge.badge-primary {
+  background-color: var(--primary) !important;
+  color: var(--on-primary, #fff) !important;
+}
+.btn-primary, .btn.btn-primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--on-primary, #fff) !important;
+}
+.btn-primary:hover, .btn.btn-primary:hover,
+.btn-primary:focus, .btn.btn-primary:focus {
+  background-color: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  color: var(--on-primary, #fff) !important;
+}
+.btn-outline-primary, .btn.btn-outline-primary,
+.btn-outline-info, .btn.btn-outline-info {
+  color: var(--primary) !important;
+  border-color: rgba(var(--primary-rgb), .45) !important;
+  background: rgba(var(--primary-rgb), .06) !important;
+}
+.btn-outline-primary:hover, .btn.btn-outline-primary:hover,
+.btn-outline-info:hover, .btn.btn-outline-info:hover {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--on-primary, #fff) !important;
+}
+/* icons (icons/bi) that rely on currentColor */
+.text-primary i, .text-info i { color: currentColor !important; }

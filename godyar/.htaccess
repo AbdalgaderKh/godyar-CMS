@@ -1,0 +1,4 @@
+# Protect legacy nested folder. Allow static assets, deny PHP direct execution.
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>

@@ -1,0 +1,9 @@
+{
+  "name": "godyar-cms",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo build assets",
+    "dev": "echo dev server"
+  },
+  "devDependencies": {}
+}

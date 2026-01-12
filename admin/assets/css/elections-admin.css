@@ -1,0 +1,52 @@
+
+/* نمط خاص لصفحات إدارة الانتخابات */
+.gdy-admin-elections {
+  color: #e5e7eb;
+}
+.gdy-admin-elections .gdy-page-header {
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.45), transparent 55%);
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+.gdy-admin-elections .glass-card,
+.gdy-admin-elections .card {
+  background: rgba(15, 23, 42, 0.98);
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+}
+.gdy-admin-elections .card-header {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), transparent);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.55);
+}
+.gdy-admin-elections .table {
+  color: #e5e7eb;
+}
+.gdy-admin-elections .table thead th {
+  background: #020617;
+  color: #f9fafb;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.9);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.gdy-admin-elections .table tbody tr:nth-child(odd) {
+  background: rgba(15, 23, 42, 0.96);
+}
+.gdy-admin-elections .table tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.9);
+}
+.gdy-admin-elections .table tbody tr:hover {
+  background: rgba(37, 99, 235, 0.4);
+}
+.gdy-admin-elections .table td,
+.gdy-admin-elections .table th {
+  border-color: rgba(30, 64, 175, 0.45);
+}
+.gdy-admin-elections .btn-xs {
+  padding: 0.15rem 0.45rem;
+  font-size: 0.7rem;
+  border-radius: 999px;
+}

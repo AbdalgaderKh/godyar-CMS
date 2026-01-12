@@ -1,0 +1,8 @@
+{
+  "slug": "HelloWidget",
+  "name": "Hello Widget",
+  "version": "1.0.0",
+  "description": "مثال بسيط لإضافة ويدجت يعرض رسالة داخل لوحة التحكم.",
+  "author": "Godyar Pro",
+  "enabled": true
+}

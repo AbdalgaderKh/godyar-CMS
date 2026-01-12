@@ -1,0 +1,4 @@
+# Merge into /godyar/.htaccess
+RewriteRule ^category/([^/]+)/amp/?$ frontend/controllers/CategoryAmpController.php?slug=$1 [L,QSA]
+RewriteRule ^tag/([^/]+)/amp/?$ frontend/controllers/TagAmpController.php?slug=$1 [L,QSA]
+RewriteRule ^push/webhook/?$ frontend/controllers/PushWebhookController.php [L,QSA]

@@ -1,0 +1,41 @@
+/* Front theme: Red (أحمر) */
+
+body.theme-red{
+  --primary: #ef4444;
+  --primary-dark: #b91c1c;
+  --primary-rgb: 239, 68, 68;
+
+  --page-bg: #fde0e0;
+  --page-bg-alt: #fccece;
+  --bg-page: var(--page-bg);
+
+  /* Header/Footer identity */
+  --header-bg: linear-gradient(180deg, rgba(var(--primary-rgb), 0.26) 0%, rgba(var(--primary-rgb), 0.16) 100%);
+  --header-secondary-bg: rgba(255,255,255,.58);
+  --header-menu-bg: rgba(255,255,255,.94);
+  --header-chip-bg: rgba(255,255,255,.62);
+  --bg-header: var(--header-bg);
+  --footer-bg: linear-gradient(180deg, rgba(var(--primary-rgb), 0.22) 0%, rgba(var(--primary-rgb), 0.13) 100%);
+  --bg-footer: var(--footer-bg);
+
+  --card-border: rgba(var(--primary-rgb), 0.29);
+  --card-border-strong: rgba(var(--primary-rgb), 0.61);
+  --card-glow: rgba(var(--primary-rgb), 0.22);
+  --card-gradient: linear-gradient(180deg, rgba(255,255,255,.98), rgba(var(--primary-rgb), 0.1));
+
+    /* Badges: white background + theme color text (أفضل قراءة) */
+  --badge-bg: #ffffff;
+  --badge-border: rgba(var(--primary-rgb), 0.48);
+  --badge-text: var(--primary);
+
+  --breaking-bg: var(--primary-dark);
+  --breaking-text: #ffffff;
+
+  --newsletter-bg: rgba(255,255,255,.92);
+  --newsletter-border: rgba(var(--primary-rgb), 0.56);
+
+  background: var(--page-bg);
+  color:#111827;
+}
+
+body.theme-red a{ color: inherit; }

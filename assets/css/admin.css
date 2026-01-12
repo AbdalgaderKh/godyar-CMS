@@ -1,0 +1,36 @@
+/* أنماط لوحة التحكم */
+
+
+/* -----------------------------------------
+   SVG icon sizing (NoCDN / SVG sprite)
+   Fix: prevent default 300x150 SVG rendering
+----------------------------------------- */
+svg.gdy-icon{
+  width:20px;
+  height:20px;
+  max-width:100%;
+  max-height:100%;
+  display:inline-block;
+  vertical-align:middle;
+  fill:currentColor;
+}
+.admin-sidebar svg.gdy-icon,
+.admin-sidebar__link-icon svg.gdy-icon{
+  width:18px;
+  height:18px;
+}
+.gdy-quick-btn svg.gdy-icon{
+  width:22px;
+  height:22px;
+}
+.gdy-stat-card svg.gdy-icon{
+  width:44px;
+  height:44px;
+  opacity:.9;
+}
+.gdy-page-header svg.gdy-icon{
+  width:56px;
+  height:56px;
+  opacity:.9;
+}
+

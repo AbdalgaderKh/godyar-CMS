@@ -1,0 +1,319 @@
+/* ========== الأساس ========== */
+
+body.godyar-front {
+  margin: 0;
+  padding: 0;
+  background: var(--page-bg); /* تركواز خفيف جداً (2%) */
+  color: var(--text-strong);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* نزيل الخلفية الافتراضية للـ body لو فيه تعريفات قديمة */
+body {
+  background: transparent;
+}
+
+/* الروابط العامة */
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* ========== الهيدر ========== */
+
+.site-header {
+  background: #020617;
+  color: #e5e7eb;
+  padding: 12px 0 8px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(30, 64, 175, 0.65);
+  position: relative;
+  z-index: 20;
+}
+
+/* شعار الموقع */
+.site-logo-link {
+  color: #e5e7eb;
+}
+.site-logo-link:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.site-logo-wrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top, var(--primary), var(--primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-strong);
+  font-size: 1.3rem;
+  box-shadow: 0 0 18px rgba(var(--primary-rgb), 0.65);
+}
+
+.site-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+
+.site-brand-text .site-title-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.site-brand-text .site-subtitle-text {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+/* أزرار الهيدر */
+.site-header-actions .btn-outline-info {
+  border-color: rgba(var(--primary-rgb), 0.7);
+  color: #e5e7eb;
+}
+.site-header-actions .btn-outline-info:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--text-strong);
+}
+
+.site-header-actions .btn-outline-light {
+  border-color: rgba(148, 163, 184, 0.8);
+  color: #e5e7eb;
+}
+.site-header-actions .btn-outline-light:hover {
+  background: #e5e7eb;
+  border-color: #e5e7eb;
+  color: var(--text-strong);
+}
+
+/* زر القائمة في الجوال */
+.navbar-toggler {
+  border-radius: 12px;
+  border: 1px solid rgba(51, 65, 85, 1);
+  color: #e5e7eb;
+}
+.navbar-toggler .navbar-toggler-icon {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* ========== شريط التنقل ========== */
+
+.site-navbar {
+  background: #020617;
+  border-top: 1px solid rgba(15, 23, 42, 1);
+  border-bottom: 1px solid rgba(30, 64, 175, 0.7);
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
+
+.site-navbar .nav-link {
+  color: rgba(var(--primary-rgb),0.16);
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease;
+}
+
+.site-navbar .nav-link:hover {
+  background: rgba(30, 64, 175, 0.7);
+  color: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+.site-navbar .nav-link.active {
+  background: var(--primary);
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* نموذج البحث في الهيدر */
+.search-form {
+  position: relative;
+  max-width: 260px;
+}
+
+.search-form .search-input {
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 999px;
+  border: 1px solid rgba(51, 65, 85, 1);
+  color: #e5e7eb;
+  padding-inline-end: 34px;
+  padding-inline-start: 10px;
+  font-size: 0.8rem;
+}
+.search-form .search-input::placeholder {
+  color: #64748b;
+}
+.search-form .search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(var(--primary-rgb), 0.4);
+}
+
+.search-form .btn-search {
+  position: absolute;
+  inset-inline-end: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: #94a3b8;
+}
+.search-form .btn-search:hover {
+  color: var(--primary);
+}
+
+/* ========== المحتوى الرئيسي ========== */
+
+.site-main {
+  min-height: calc(100vh - 200px);
+  padding: 22px 0 30px;
+}
+
+/* مثال لتنسيق شبكة الأخبار (لو حاب تستخدمه في HomeController) */
+.news-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
+  gap: 20px;
+}
+
+/* بطاقات الأخبار */
+.news-card {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.25);
+}
+.news-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.news-card-body {
+  padding: 12px 14px 14px;
+}
+.news-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.news-card-meta {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+.news-card-excerpt {
+  font-size: 0.83rem;
+  color: #374151;
+}
+
+/* ========== الفوتر ========== */
+
+.site-footer {
+  background: #020617;
+  color: #e5e7eb;
+  padding: 20px 0 18px;
+  border-top: 1px solid rgba(30, 64, 175, 0.75);
+  position: relative;
+  z-index: 10;
+}
+
+.footer-copy {
+  font-size: 0.86rem;
+}
+.footer-meta {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+.footer-brand {
+  color: var(--primary);
+}
+
+/* روابط الفوتر */
+.footer-links {
+  font-size: 0.82rem;
+}
+.footer-link {
+  color: rgba(var(--primary-rgb),0.16);
+}
+.footer-link:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
+.footer-sep {
+  color: #6b7280;
+}
+
+/* أزرار السوشيال في الفوتر */
+.footer-social-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: #e5e7eb;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.15s ease;
+}
+.footer-social-btn:hover {
+  transform: translateY(-1px);
+}
+.footer-social-btn.fb:hover {
+  background: #0f172a;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.footer-social-btn.x:hover {
+  background: #0f172a;
+  border-color: #e5e7eb;
+  color: #e5e7eb;
+}
+.footer-social-btn.ig:hover {
+  background: #0f172a;
+  border-color: #ec4899;
+  color: #f472b6;
+}
+.footer-social-btn.yt:hover {
+  background: #0f172a;
+  border-color: #f97373;
+  color: #fecaca;
+}
+
+/* ========== تجاوبية ========== */
+
+@media (max-width: 991.98px) {
+  .search-form {
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .news-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .site-main {
+    padding-top: 16px;
+  }
+}

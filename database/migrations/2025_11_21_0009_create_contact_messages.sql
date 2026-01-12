@@ -1,0 +1,25 @@
+-- إنشاء / تعديل جدول رسائل التواصل
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(190) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  subject VARCHAR(255) NULL,
+  message TEXT NOT NULL,
+  status VARCHAR(20) NOT NULL DEFAULT 'new',
+  is_read TINYINT(1) NOT NULL DEFAULT 0,
+  replied_at DATETIME NULL,
+  replied_by INT UNSIGNED NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_status (status),
+  KEY idx_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- في حال كان الجدول موجوداً بدون بعض الأعمدة، نحاول إضافتها
+ALTER TABLE contact_messages
+  ADD COLUMN IF NOT EXISTS status VARCHAR(20) NOT NULL DEFAULT 'new' AFTER message,
+  ADD COLUMN IF NOT EXISTS is_read TINYINT(1) NOT NULL DEFAULT 0 AFTER status,
+  ADD COLUMN IF NOT EXISTS replied_at DATETIME NULL AFTER is_read,
+  ADD COLUMN IF NOT EXISTS replied_by INT UNSIGNED NULL AFTER replied_at,
+  ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP AFTER created_at;

@@ -1,0 +1,163 @@
+/* نظام ألوان التركواز المطلوب */
+:root {
+    --turquoise-60: rgba(64, 224, 208, 0.6);
+    --turquoise-2: rgba(64, 224, 208, 0.02);
+    --turquoise-3_5: rgba(64, 224, 208, 0.035);
+    --turquoise-primary: #40e0d0;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --border-light: rgba(64, 224, 208, 0.2);
+}
+
+/* إعدادات عامة */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--turquoise-2);
+    color: var(--text-dark);
+    line-height: 1.6;
+    direction: rtl;
+}
+
+/* الهيدر والفوتر - 60% تركواز */
+header, footer {
+    background-color: var(--turquoise-60) !important;
+    background: linear-gradient(135deg, var(--turquoise-60), rgba(64, 224, 208, 0.7));
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3);
+}
+
+/* الهيدر الرئيسي */
+.main-header {
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.main-header.scrolled {
+    background-color: var(--turquoise-60);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* الفوتر */
+.main-footer {
+    background: linear-gradient(135deg, var(--turquoise-60), rgba(64, 224, 208, 0.8));
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+/* البلوكات والمكونات - 3.5% تركواز */
+.card, .block, .widget, .panel, .article, .news-item {
+    background-color: var(--turquoise-3_5) !important;
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(64, 224, 208, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover, .block:hover, .widget:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(64, 224, 208, 0.2);
+}
+
+/* أزرار بتصميم تركواز */
+.btn-turquoise {
+    background: linear-gradient(135deg, var(--turquoise-primary), #20b2aa);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-turquoise:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(64, 224, 208, 0.4);
+}
+
+/* التنقل */
+.navbar {
+    background-color: transparent !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--text-light) !important;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--turquoise-primary) !important;
+}
+
+/* لوحة التحكم */
+.admin-sidebar {
+    background: linear-gradient(180deg, var(--turquoise-60), rgba(64, 224, 208, 0.8));
+    min-height: 100vh;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.admin-content {
+    background-color: var(--turquoise-2);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* تصميم متجاوب */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0.5rem 0;
+    }
+    
+    .card, .block {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* تأثيرات خاصة */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.turquoise-glow {
+    box-shadow: 0 0 20px rgba(64, 224, 208, 0.3);
+}
+
+/* وضع القراءة الليلي */
+body.reading-mode {
+    background-color: #020617;
+    color: #e5e7eb;
+}
+
+body.reading-mode header,
+body.reading-mode .site-footer {
+    background-color: transparent;
+    border-color: rgba(15,23,42,0.8);
+}
+
+body.reading-mode a {
+    color: #38bdf8;
+}
+
+body.reading-mode .card,
+body.reading-mode .block,
+body.reading-mode .widget {
+    background-color: #020617;
+    border-color: #1f2937;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.9);
+}

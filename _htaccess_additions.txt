@@ -1,0 +1,19 @@
+# Additions for new pages/APIs (to merge with your existing .htaccess)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /godyar/
+
+  # Contact
+  RewriteRule ^contact/?$ frontend/controllers/ContactController.php [L,QSA]
+
+  # Archive by day: /archive/YYYY/MM/DD
+  RewriteRule ^archive/([0-9]{4})/([0-9]{1,2})/([0-9]{1,2})/?$ frontend/controllers/ArchiveDayController.php?year=$1&month=$2&day=$3 [L,QSA]
+
+  # Archive by ISO week: /archive/week/2025-W46
+  RewriteRule ^archive/week/([0-9]{4})-W([0-9]{1,2})/?$ frontend/controllers/ArchiveWeekController.php?year=$1&week=$2 [L,QSA]
+
+  # JSON APIs
+  RewriteRule ^api/category/([^/]+)\.json$ frontend/controllers/ApiCategoryController.php?slug=$1 [L,QSA]
+  RewriteRule ^api/tag/([^/]+)\.json$ frontend/controllers/ApiTagController.php?slug=$1 [L,QSA]
+  RewriteRule ^api/trending\.json$ frontend/controllers/ApiTrendingController.php [L,QSA]
+</IfModule>

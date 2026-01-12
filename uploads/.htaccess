@@ -1,0 +1,6 @@
+Options -Indexes
+
+# منع تنفيذ ملفات PHP داخل uploads
+<FilesMatch "\.(php|phtml|phar)$">
+  Require all denied
+</FilesMatch>

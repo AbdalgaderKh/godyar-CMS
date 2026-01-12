@@ -1,0 +1,10 @@
+/* Hotfix: force sane sizing for SVG sprite icons */
+svg.gdy-icon,
+.gdy-icon{
+  width: 18px !important;
+  height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}

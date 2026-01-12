@@ -1,0 +1,44 @@
+[11-Jan-2026 18:36:42 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:37:23 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:43:22 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:48:46 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:48:46 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:48:46 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:48:46 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 18:48:47 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:00:21 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:01:46 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:14:30 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:16:59 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:17:02 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:20:14 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 19:21:42 Asia/Riyadh] فشل الاتصال بقاعدة البيانات: SQLSTATE[HY000] [1045] Access denied for user ''@'localhost' (using password: NO)
+[11-Jan-2026 21:13:28 Asia/Riyadh] [Godyar Ads] Table creation error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '__('t_c97cd8bb9c', 'موضع ظهور الإعلان'),
+            `image_ur...' at line 5
+[11-Jan-2026 21:14:19 Asia/Riyadh] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'name' in 'SELECT' in /home/geqzylcq/public_html/admin/roles/edit.php:33
+Stack trace:
+#0 /home/geqzylcq/public_html/admin/roles/edit.php(33): PDO->query('SELECT id, name...')
+#1 {main}
+  thrown in /home/geqzylcq/public_html/admin/roles/edit.php on line 33
+[11-Jan-2026 21:14:54 Asia/Riyadh] [Manage Videos] Fetch error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'geqzylcq_godyarnew.featured_videos' doesn't exist
+[11-Jan-2026 21:14:54 Asia/Riyadh] [Manage Videos] Fetch error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'geqzylcq_godyarnew.featured_videos' doesn't exist
+[11-Jan-2026 22:16:16 Asia/Riyadh] [Godyar Ads] Table creation error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '__('t_c97cd8bb9c', 'موضع ظهور الإعلان'),
+            `image_ur...' at line 5
+[11-Jan-2026 22:25:31 Asia/Riyadh] [Godyar Ads] Table creation error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '__('t_c97cd8bb9c', 'موضع ظهور الإعلان'),
+            `image_ur...' at line 5
+[11-Jan-2026 22:25:45 Asia/Riyadh] [Manage Videos] Fetch error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'geqzylcq_godyarnew.featured_videos' doesn't exist
+[11-Jan-2026 23:29:39 Asia/Riyadh] [Godyar Ads] Table creation error: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '__('t_c97cd8bb9c', 'موضع ظهور الإعلان'),
+            `image_ur...' at line 5
+[11-Jan-2026 23:30:17 Asia/Riyadh] [Manage Videos] Fetch error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'geqzylcq_godyarnew.featured_videos' doesn't exist
+[11-Jan-2026 23:39:04 Asia/Riyadh] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.status' in 'SELECT' in /home/geqzylcq/public_html/admin/news/translations.php:187
+Stack trace:
+#0 /home/geqzylcq/public_html/admin/news/translations.php(187): PDO->prepare('SELECT t.id, t....')
+#1 {main}
+  thrown in /home/geqzylcq/public_html/admin/news/translations.php on line 187
+[11-Jan-2026 23:41:43 Asia/Riyadh] PHP Fatal error:  Uncaught PDOException: There is no active transaction in /home/geqzylcq/public_html/admin/ads/create_table.php:154
+Stack trace:
+#0 /home/geqzylcq/public_html/admin/ads/create_table.php(154): PDO->rollBack()
+#1 {main}
+  thrown in /home/geqzylcq/public_html/admin/ads/create_table.php on line 154
+[11-Jan-2026 23:59:35 Asia/Riyadh] [Featured Videos] Auth error: Call to undefined method Godyar\Auth::hasAnyRole()
+[11-Jan-2026 23:59:43 Asia/Riyadh] [Featured Videos] Auth error: Call to undefined method Godyar\Auth::hasAnyRole()

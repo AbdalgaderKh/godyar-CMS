@@ -1,0 +1,4 @@
+/* LTR support for EN/FR */
+html[dir="ltr"] body { direction: ltr; text-align: left; }
+html[dir="ltr"] .nav-links, html[dir="ltr"] .gdy-topbar, html[dir="ltr"] .gdy-hero-meta { direction: ltr; }
+html[dir="ltr"] .gdy-report, html[dir="ltr"] .gdy-article-body { direction: ltr; }

@@ -1,0 +1,269 @@
+# =========================================================
+# Godyar CMS — Front Controller & Pretty URLs
+# Apache / LiteSpeed
+# =========================================================
+
+RewriteEngine On
+
+# لو كان الموقع في مجلد فرعي، عدّل RewriteBase مثلاً إلى /godyar/
+RewriteBase /
+
+# ---------------------------------------------------------
+# MIME + Charset (improve compatibility hints)
+# ---------------------------------------------------------
+<IfModule mod_mime.c>
+  AddDefaultCharset UTF-8
+  AddCharset UTF-8 .css .js .json .webmanifest
+  AddType application/javascript .js
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+
+# ---------------------------------------------------------
+# 🔐 Security Headers (HSTS includeSubDomains) — Added
+# NOTE: CSP is set dynamically in PHP (nonce-based) — not here.
+# ---------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Disable directory listing & server signature
+Options -Indexes
+ServerSignature Off
+
+# ---------------------------------------------------------
+# ✅ Production switch (بدون php.ini)
+# ---------------------------------------------------------
+SetEnv APP_ENV production
+# (اختياري) للتطوير مؤقتًا:
+# SetEnv APP_ENV development
+
+# ---------------------------------------------------------
+# --- Favicon & PWA icon fallbacks (avoid 404) ---
+# (يُفضّل أن تكون الملفات موجودة تحت assets/images/icons/)
+# ---------------------------------------------------------
+RewriteRule ^favicon\.ico$ assets/images/icons/favicon.ico [L,NC]
+RewriteRule ^apple-touch-icon\.png$ assets/images/icons/apple-touch-icon.png [L,NC]
+RewriteRule ^favicon-16x16\.png$ assets/images/icons/favicon-16x16.png [L,NC]
+RewriteRule ^favicon-32x32\.png$ assets/images/icons/favicon-32x32.png [L,NC]
+
+
+# ---------------------------------------------------------
+# PWA: localized manifest fallback (avoid /ar/manifest.php 404)
+# ---------------------------------------------------------
+RewriteRule ^(ar|en|fr)/manifest\.php$ /manifest.php?lang=$1 [L,QSA,NC]
+RewriteRule ^(ar|en|fr)/manifest\.json$ /manifest.php?lang=$1 [L,QSA,NC]
+RewriteRule ^manifest\.webmanifest$ /manifest.php [L,QSA,NC]
+RewriteRule ^(ar|en|fr)/manifest\.webmanifest$ /manifest.php?lang=$1 [L,QSA,NC]
+# ---------------------------------------------------------
+# SEO endpoints (friendly URLs)
+# ---------------------------------------------------------
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteRule ^rss\.xml$ rss.php [L]
+RewriteRule ^robots\.txt$ robots.php [L]
+RewriteRule ^indexnow-key\.txt$ indexnow_key.php [L]
+RewriteRule ^og/news/([0-9]+)\.png$ og_news.php?id=$1 [L,QSA]
+
+# ---------------------------------------------------------
+# 0) تحويلات Canonical للروابط (.php -> بدون امتداد)
+# ---------------------------------------------------------
+RewriteCond %{THE_REQUEST} \s/+((login|register|profile|logout)\.php)[\s?] [NC]
+RewriteRule ^(login|register|profile|logout)\.php$ /$1 [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+admin/login\.php[\s?] [NC]
+RewriteRule ^admin/login\.php$ /admin/login [R=301,L]
+
+# ---------------------------------------------------------
+# 1) مسارات سريعة
+# ---------------------------------------------------------
+RewriteRule ^login$ /login.php [L,QSA]
+RewriteRule ^register$ /register.php [L,QSA]
+RewriteRule ^profile$ /profile.php [L,QSA]
+RewriteRule ^logout$ /logout.php [L,QSA]
+RewriteRule ^admin/login$ /admin/login.php [L,QSA]
+
+# ---------------------------------------------------------
+# ✅ حماية ملفات حساسة
+# ---------------------------------------------------------
+<IfModule mod_authz_core.c>
+  <FilesMatch "\.(log|ini|env|sql|bak|old|swp)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# ---------------------------------------------------------
+# ✅ حماية مجلدات غير Public
+# ---------------------------------------------------------
+# Install directory routing:
+# - Allow /install during setup (until install/install.lock is created)
+# - Block /install after setup (when lock exists)
+RewriteCond %{REQUEST_URI} ^/install/ [NC]
+RewriteCond %{DOCUMENT_ROOT}/install/install.lock !-f
+RewriteRule ^install(/|$) - [L]
+
+RewriteCond %{REQUEST_URI} ^/install/ [NC]
+RewriteCond %{DOCUMENT_ROOT}/install/install.lock -f
+RewriteRule ^install/ - [F,L]
+RewriteRule ^_dev_tools/ - [F,L]
+RewriteRule ^logs/ - [F,L]
+RewriteRule ^storage/ - [F,L]
+RewriteRule ^includes/ - [F,L]
+RewriteRule ^vendor/ - [F,L]
+RewriteRule ^src/ - [F,L]
+RewriteRule ^config/ - [F,L]
+RewriteRule ^migrations/ - [F,L]
+RewriteRule ^frontend/ - [F,L]
+
+# ---------------------------------------------------------
+# 1) Legacy directories (تمت إزالتها من webroot)
+# ---------------------------------------------------------
+RewriteRule ^pages_static/ - [G,L]
+
+# ---------------------------------------------------------
+# 2) Legacy endpoints redirects (Deprecated PHP pages)
+# ---------------------------------------------------------
+
+RewriteCond %{THE_REQUEST} \s/+article\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} (^|&)preview=1(&|$) [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=([0-9]+)(&|$) [NC]
+RewriteRule ^article\.php$ /preview/news/%2? [R=302,L]
+
+RewriteCond %{THE_REQUEST} \s/+article\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} (^|&)preview=1(&|$) [NC]
+RewriteCond %{QUERY_STRING} (^|&)slug=([^&]+)(&|$) [NC]
+RewriteRule ^article\.php$ /news/%2?preview=1 [R=302,L]
+
+RewriteCond %{THE_REQUEST} \s/+article\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} !(^|&)preview=1(&|$) [NC]
+RewriteCond %{QUERY_STRING} (^|&)slug=([^&]+)(&|$) [NC]
+RewriteRule ^article\.php$ /news/%2?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+article\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} !(^|&)preview=1(&|$) [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=([0-9]+)(&|$) [NC]
+RewriteRule ^article\.php$ /news/id/%2?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+article\.php[\s?] [NC]
+RewriteRule ^article\.php$ - [G,L]
+
+RewriteCond %{THE_REQUEST} \s/+category\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} (^|&)id=([0-9]+)(&|$) [NC]
+RewriteRule ^category\.php$ /category/id/%2?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+category\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} (^|&)slug=([^&]+)(&|$) [NC]
+RewriteCond %{QUERY_STRING} (^|&)page=([0-9]+)(&|$) [NC]
+RewriteRule ^category\.php$ /category/%2/page/%4?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+category\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} (^|&)slug=([^&]+)(&|$) [NC]
+RewriteRule ^category\.php$ /category/%2?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+category\.php[\s?] [NC]
+RewriteRule ^category\.php$ - [G,L]
+
+RewriteCond %{THE_REQUEST} \s/+page\.php[\s?] [NC]
+RewriteCond %{QUERY_STRING} (^|&)slug=([^&]+)(&|$) [NC]
+RewriteRule ^page\.php$ /page/%2?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+page\.php[\s?] [NC]
+RewriteRule ^page\.php$ - [G,L]
+
+RewriteCond %{THE_REQUEST} \s/+archive\.php[\s?] [NC]
+RewriteRule ^archive\.php$ /archive?%{QUERY_STRING} [R=301,L]
+
+RewriteCond %{THE_REQUEST} \s/+trending\.php[\s?] [NC]
+RewriteRule ^trending\.php$ /trending?%{QUERY_STRING} [R=301,L]
+
+# ---------------------------------------------------------
+# ✅ (مهم) اسمح فقط لمجلدات الستاتك تمر بدون الراوتر
+# ---------------------------------------------------------
+RewriteRule ^(assets|icons|splash|screenshots|uploads)/ - [L,NC]
+
+# ---------------------------------------------------------
+# 3) لا تعد كتابة "الملفات" الحقيقية فقط
+#    (لا تستخدم -d هنا حتى لا يعطل مسارات مثل /ar/...)
+# ---------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# ---------------------------------------------------------
+# 4) Pretty URLs → app.php
+# ---------------------------------------------------------
+RewriteRule ^ app.php [L,QSA]
+
+# =========================================================
+# Performance: cache static assets + compression
+# =========================================================
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Favicons / Web App Manifest
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType image/vnd.microsoft.icon "access plus 1 year"
+  ExpiresByType application/manifest+json "access plus 1 week"
+  ExpiresByType application/json "access plus 1 week"
+  ExpiresDefault "access plus 7 days"
+
+  # CSS/JS
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType text/javascript "access plus 30 days"
+  ExpiresByType application/javascript "access plus 30 days"
+
+  # Images
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/jpg  "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/gif  "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+
+  # Fonts
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff  "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+  ExpiresByType application/font-woff  "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Static assets (long cache)
+  <FilesMatch "\.(css|js|mjs|png|jpe?g|gif|svg|webp|avif|ico|woff2?|ttf|otf)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML/PHP (no cache)
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # Ensure proper content negotiation for compression caches
+  Header set Vary "Accept-Encoding"
+
+  # --- PWA: ensure service worker & manifest update quickly ---
+  <FilesMatch "^(sw|service-worker)\.js$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+  <FilesMatch "^manifest\.webmanifest$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+# Gzip
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Brotli (إن كان مدعومًا على السيرفر)
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/css text/javascript application/javascript application/x-javascript application/json application/xml image/svg+xml
+  # BrotliCompressionQuality 5
+</IfModule>

@@ -1,0 +1,12 @@
+body.theme-beige{
+  background:#f5efe4;
+  color:#111827;
+}
+body.theme-beige .topbar{
+  background:linear-gradient(135deg,#fbbf77,#f97316);
+  color:#111827;
+}
+body.theme-beige .site-footer{
+  background:#fef3c7;
+  color:#4b5563;
+}

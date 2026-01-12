@@ -1,0 +1,14 @@
+body.theme-light{
+  background:#f9fafb;
+  color:#111827;
+}
+body.theme-light .topbar{
+  background:#ffffff;
+  color:#111827;
+  border-bottom:1px solid rgba(15,23,42,0.06);
+}
+body.theme-light .site-footer{
+  background:#ffffff;
+  color:#6b7280;
+  border-top:1px solid rgba(15,23,42,0.06);
+}

@@ -1,0 +1,8 @@
+{
+  "slug": "TopBar",
+  "name": "Top Bar Notice",
+  "version": "1.0.0",
+  "description": "شريط علوي للرسائل والتنبيهات يمكن التحكم به من لوحة التحكم.",
+  "author": "Godyar Pro",
+  "enabled": true
+}

@@ -1,0 +1,16 @@
+Options -Indexes
+
+# Allow access to admin media pages
+<IfModule mod_authz_core.c>
+  Require all granted
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Allow from all
+</IfModule>
+
+# Security headers (optional)
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

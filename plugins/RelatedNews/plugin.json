@@ -1,0 +1,8 @@
+{
+  "name": "Related News",
+  "slug": "related-news",
+  "enabled": true,
+  "version": "1.0.0",
+  "description": "إضافة تعرض مقالات ذات صلة أسفل الخبر (حسب التصنيف).",
+  "author": "Godyar Pro"
+}

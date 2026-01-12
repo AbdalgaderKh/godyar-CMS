@@ -1,0 +1,12 @@
+# Basic admin security
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# يمكنك إضافة قواعد خاصة بلوحة التحكم هنا
+</IfModule>
+
+# منع الوصول لبعض أنواع الملفات
+<FilesMatch "\.(sql|bak|zip|tar|gz)$">
+  Require all denied
+</FilesMatch>
