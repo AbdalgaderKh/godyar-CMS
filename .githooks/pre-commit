@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Optional pre-commit hook: if gitleaks is installed, run it to detect secrets before commit.
+# To enable: git config core.hooksPath .githooks
+
+if command -v gitleaks >/dev/null 2>&1; then
+  echo "Running gitleaks pre-commit check..."
+  gitleaks detect --redact --exit-code=1 --path . || {
+    echo "gitleaks found potential secrets. Fix or suppress then retry commit." >&2
+    exit 1
+  }
+else
+  echo "gitleaks not found; skipping secret pre-commit check (install gitleaks for local checks)."
+fi
