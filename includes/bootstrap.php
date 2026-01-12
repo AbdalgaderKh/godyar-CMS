@@ -17,6 +17,8 @@ if (!defined('ROOT_PATH')) {
 
 // Audit log helper
 require_once ROOT_PATH . '/includes/audit_log.php';
+// Simple structured logger
+require_once ROOT_PATH . '/includes/logger.php';
 // Register internal autoloader (and composer autoload if present)
 $autoload = ROOT_PATH . '/vendor/autoload.php';
 if (is_file($autoload)) {
@@ -143,18 +145,19 @@ if (!headers_sent()) {
 
     }
 
-    // Strict CSP (scripts require nonce; no unsafe-inline)
+    // Strict CSP (prefer no inline scripts; keep inline styles for compatibility)
     $csp = "default-src 'self'; "
          . "base-uri 'self'; "
          . "object-src 'none'; "
          . "frame-ancestors 'self'; "
          . "img-src 'self' data:; "
          . "style-src 'self' 'unsafe-inline'; "
-         . "script-src 'self' 'unsafe-inline'; "
+         . "script-src 'self'; "
          . "connect-src 'self'; "
          . "font-src 'self' data:; "
          . "media-src 'self' data:; "
-         . "form-action 'self';";
+         . "form-action 'self'; "
+         . "upgrade-insecure-requests;";
 
 header("Content-Security-Policy: " . $csp);
     // Robots header: allow indexing on public pages, prevent indexing on admin
