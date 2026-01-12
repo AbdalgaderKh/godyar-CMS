@@ -388,8 +388,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (mb_strlen($displayName, 'UTF-8') < 2 || mb_strlen($displayName, 'UTF-8') > 50) {
                         throw new RuntimeException('اسم الظهور يجب أن يكون بين 2 و 50 حرف.');
                     }
-                    if (!preg_match('/^[\p{L}\p{N}._-]+(?:\s+[\p{L}\p{N}._-]+)*$/u', $displayName)) {
-                        throw new RuntimeException('اسم الظهور يحتوي على رموز غير مسموحة.');
+                    // نسمح بالحروف (بما فيها العربية) + الأرقام + العلامات (مثل التشكيل) + بعض الرموز الشائعة.
+                    // الهدف: تجنب XSS مع عدم كسر أسماء عربية تحتوي على تشكيل أو فاصلة عليا.
+                    if (!preg_match('/^[\p{L}\p{M}\p{N}._\-\'’]+(?:\s+[\p{L}\p{M}\p{N}._\-\'’]+)*$/u', $displayName)) {
+                        throw new RuntimeException('اسم الظهور يحتوي على رموز غير مسموحة. المسموح: حروف/أرقام/مسافات و . _ - \'');
                     }
                 }
 
