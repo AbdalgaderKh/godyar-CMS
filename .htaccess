@@ -32,6 +32,9 @@ RewriteBase /
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
   Header always set X-XSS-Protection "1; mode=block"
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  # Balanced CSP for static files/pages that may bypass PHP header().
+  # Uses setifempty so it won't duplicate/override CSP set by PHP.
+  Header setifempty Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; frame-src 'self'; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https:; style-src-elem 'self' 'unsafe-inline' https: https://www.gstatic.com; script-src 'self' 'unsafe-inline' https:; connect-src 'self' https: wss:; font-src 'self' data: https:; media-src 'self' data: blob:; form-action 'self'; upgrade-insecure-requests"
 </IfModule>
 
 # Disable directory listing & server signature
